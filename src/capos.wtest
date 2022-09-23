@@ -1,0 +1,37 @@
+import capos.*
+
+test "rolando encuentra espada libro y collar solo agarra los 2 primeros"{
+	rolando.encontrar(espada)	
+	rolando.encontrar(libro)
+	rolando.encontrar(collar)	
+	
+	assert.equals(#{espada,libro}, rolando.artefactos())
+}
+
+test "rolando encuentra y deja en el castillo varios artefactos" {
+	rolando.encontrar(espada)	
+	rolando.encontrar(libro)
+	rolando.irASuHogar()
+	rolando.encontrar(collar)	
+	rolando.irASuHogar()
+	
+	assert.equals(#{espada,libro, collar}, castillo.baul())
+}
+
+test "posesiones"{
+	castillo.almacenar(#{espada,collar})
+	rolando.encontrar(armadura)
+	assert.equals(#{espada,collar,armadura}, rolando.posesiones())
+	
+}
+
+test "historial de rolando"{
+	rolando.encontrar(espada)
+	rolando.encontrar(libro)
+	rolando.encontrar(collar)
+ 	rolando.irASuHogar()
+  	rolando.encontrar(armadura)
+ 	rolando.encontrar(collar)
+ 
+	assert.equals([espada,libro,collar,armadura,collar],rolando.historial())
+}
